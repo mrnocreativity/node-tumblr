@@ -45,7 +45,7 @@ module.exports =
 
 # Send requests
 req = (url, method = 'GET', fn, oauth, data) ->
-  options = {url, method, followRedirect: false, json: true}
+  options = {url, method, followRedirect: false, json: true, protocol: 'http:'}
   options.oauth = oauth if oauth?
 
   # If we have POST data, set as form element and set json to false
