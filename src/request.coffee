@@ -53,7 +53,7 @@ req = (url, method = 'GET', fn, oauth, data) ->
   options.form = data if data?
 
   request options, (error, response, body) ->
-    if not error and response.statusCode not in [200, 301]
+    if not error and response.statusCode not in [200, 201, 301]
       error = "#{response.statusCode} #{body.meta.msg}"
 
     if fn?
