@@ -52,9 +52,12 @@ module.exports = Blog = (@host, @oauth) ->
 
     request.get url, fn
 
-
   @post = (data, fn) ->
     url = request.postUrl @
+    request.post url, fn, @oauth, data
+
+  @edit = (data, fn) ->
+    url = request.editUrl @
     request.post url, fn, @oauth, data
 
   # Create alias for each type of posts and forward this call to @posts method

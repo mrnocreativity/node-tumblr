@@ -6,6 +6,9 @@ module.exports =
   postUrl: (self) ->
     'http://api.tumblr.com/v2/blog/' + self.host + '/post';
 
+  editUrl: (self) ->
+    'http://api.tumblr.com/v2/blog/' + self.host + '/post/edit';
+
   # Prepare URL for blog requests
   blogUrl: (action, self, options = {}) ->
     params = [
