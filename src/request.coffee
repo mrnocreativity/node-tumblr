@@ -2,6 +2,13 @@ qs      = require 'querystring'
 request = require 'request'
 
 module.exports =
+  # Prepare URL for creating posts via POST request
+  postUrl: (self) ->
+    'http://api.tumblr.com/v2/blog/' + self.host + '/post';
+
+  editUrl: (self) ->
+    'http://api.tumblr.com/v2/blog/' + self.host + '/post/edit';
+
   # Prepare URL for blog requests
   blogUrl: (action, self, options = {}) ->
     params = [
@@ -33,19 +40,23 @@ module.exports =
 
   # Send GET and POST requests
   get: (url, fn) -> req url, 'GET', fn
-  post: (url, fn) -> req url, 'POST', fn
+  post: (url, fn, oauth, data) -> req url, 'POST', fn, oauth, data
 
   # Send GET and POST requests with OAuth
   oauthGet: (url, oauth, fn) -> req url, 'GET', fn, oauth
   oauthPost: (url, oauth, fn) -> req url, 'POST', fn, oauth
 
 # Send requests
-req = (url, method = 'GET', fn, oauth) ->
-  options = {url, method, followRedirect: false, json: true}
+req = (url, method = 'GET', fn, oauth, data) ->
+  options = {url, method, followRedirect: false, json: true, protocol: 'http:'}
   options.oauth = oauth if oauth?
 
+  # If we have POST data, set as form element and set json to false
+  options.json = false if data?
+  options.form = data if data?
+
   request options, (error, response, body) ->
-    if not error and response.statusCode not in [200, 301]
+    if not error and response.statusCode not in [200, 201, 301]
       error = "#{response.statusCode} #{body.meta.msg}"
 
     if fn?

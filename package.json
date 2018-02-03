@@ -1,12 +1,13 @@
 {
     "name": "tumblr"
-  , "version": "0.4.1"
+  , "version": "0.4.2"
   , "description": "A wrapper for the Tumblr API"
   , "keywords": ["tumblr", "blog", "api", "wrapper"]
   , "author": "Alexey Simonenko <alexey@simonenko.su>"
   , "contributors": [
         "Alexey Simonenko <alexey@simonenko.su>"
       , "Greg Wang <gregwym@qq.com>"
+      , "Ronny Welter <work@nocreativity.com>"
     ]
   , "homepage": "http://simonenko.su/projects/node-tumblr"
   , "main": "./lib/index"
